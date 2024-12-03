@@ -1,30 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import Loading from './loading'
-
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Loading from './loading';
 
 const ItemDetail = () => {
-    const { id } = useParams() // Get the user ID from the URL
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const { id } = useParams();
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUser = async () => {
-            setLoading(true)
+            setLoading(true);
             try {
-                const res = await fetch(`https://jsonplaceholder.typicode.com/Users/${id}`)
-                const data = await res.json()
-                setUser(data)
-                setLoading(false)
+                const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+                const data = await res.json();
+                setUser(data);
             } catch (error) {
-                console.log("Error fetching user details:", error)
+                console.log("Error fetching user details:", error);
+            } finally {
+                setLoading(false);
             }
-        }
-        fetchUser()
-    }, [id]) // Dependency on 'id' ensures data is refetched if the URL changes
+        };
+        fetchUser();
+    }, [id]);
+
+    if (loading) {
+        return <Loading />;
+    }
 
     if (!user) {
-        return <div>Loading...</div>
+        return <div>User not found.</div>;
     }
 
     return (
@@ -36,7 +40,7 @@ const ItemDetail = () => {
             <p><strong>Phone:</strong> {user.phone}</p>
             <p><strong>Website:</strong> {user.website}</p>
         </div>
-    )
-}
+    );
+};
 
-export default ItemDetail
+export default ItemDetail;

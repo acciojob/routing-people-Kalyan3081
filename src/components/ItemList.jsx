@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Loading from '../tours/loading'
+import Loading from './loading'
 
 const ItemList = () => {
     const [items, setItems] = useState([])

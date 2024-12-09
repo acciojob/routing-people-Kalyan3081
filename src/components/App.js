@@ -1,20 +1,18 @@
-import React from "react";
-import './../styles/App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ItemDetail from './ItemDetail';
-import ItemList from './ItemList';
-
+import React from 'react'
+import UserDetails from './UserDetails'
+import UserList from './UserList'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+ 
+ 
 const App = () => {
-    return (
-        <div>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<ItemList />} />
-                    <Route path="/users/:id" element={<ItemDetail />} />
-                </Routes>
-            </BrowserRouter>
-        </div>
-    );
-};
-
-export default App;
+  return (
+  <Router>
+    <Routes>
+      <Route path='/' element={<UserList />} />
+      <Route path='/users/:id' element={<UserDetails />} />
+    </Routes>
+  </Router>
+  )
+}
+ 
+export default App
